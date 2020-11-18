@@ -5,6 +5,8 @@ import game
 # Pour créer main Maze
 laby = Maze()
 
+# TODO: classe hero
+
 # Pour rélier les fonctions du game avec main et faire passer les parametres
 game.set_case_definition(
     laby.list_walls_coord,
