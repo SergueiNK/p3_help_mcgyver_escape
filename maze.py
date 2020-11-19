@@ -26,3 +26,7 @@ class Maze:
                     else:
                         self.position_guard_coord = coordinate
 
+    def update_list_floors_coord(self, list_items_coord):
+        for coord in list_items_coord:
+            self.list_floors_coord.remove(coord)
+

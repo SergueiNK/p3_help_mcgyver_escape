@@ -7,7 +7,7 @@ class Items:
     syringe_coord =()
 
 
-    def __init__ (self,laby):
+    def __init__ (self, laby):
             num_random_positions_items = 3
             random_items_coord = random.sample(laby.list_floors_coord, 3)
             self.ether_coord = random_items_coord[0]

@@ -9,7 +9,7 @@
 LINUX
 
 `.venv/bin/pip install -r dev_requirements.txt`
-
+ 
 WINDOBS
 
 `cd .venv/Scripts/`
