@@ -1,5 +1,5 @@
 import constants
-
+import random
 
 class Maze:
 
@@ -7,6 +7,10 @@ class Maze:
     list_floors_coord = []
     position_guard_coord = ()
     position_departure_coord = ()
+    ether_coord = ()
+    plastic_tube_coord = ()
+    syringe_coord = ()
+    hero = None
 
     def __init__(self):
         with open(constants.STRUCTURE_FILE, 'r') as data:
@@ -25,8 +29,19 @@ class Maze:
                         self.position_departure_coord = coordinate
                     else:
                         self.position_guard_coord = coordinate
+        self.init_items_coord()
+
+
+    def init_items_coord(self):
+        random_items_coord = random.sample(self.list_floors_coord, 3)
+        self.ether_coord = random_items_coord[0]
+        self.plastic_tube_coord = random_items_coord[1]
+        self.syringe_coord = random_items_coord[2]
+        self.update_list_floors_coord(random_items_coord)
+
 
     def update_list_floors_coord(self, list_items_coord):
         for coord in list_items_coord:
             self.list_floors_coord.remove(coord)
+
 
