@@ -24,7 +24,7 @@ def init_game_structure(laby, heroe):
 
 def set_case_definition(walls_coord,
                         floors_coord,
-                        departure_coord,
+                        hero_coord,
                         guard_coord,
                         ether_coord,
                         plastic_tube_coord,
@@ -34,7 +34,7 @@ def set_case_definition(walls_coord,
     # fonction d'attribution de cases
 
     show_departure = pygame.image.load(constants.IMAGE_GYVER).convert_alpha()
-    SCREEN.blit(show_departure, departure_coord)
+    SCREEN.blit(show_departure, hero_coord)
 
     show_guard = pygame.image.load(constants.IMAGE_GUARD).convert_alpha()
     SCREEN.blit(show_guard, guard_coord)
@@ -65,11 +65,23 @@ def manag_heroes_move(event, laby, heroe):
     elif event.key == pygame.K_DOWN:
         print("Player moved down!")
     elif event.key == pygame.K_RIGHT:
-        # heroe.heroes_position
         # Modifier le tuple pour avoir la futur position
-        #laby.update_list_floors_coord([coord_hero_T,coord_hero_t-1])
+        coord_hero_T1 = list(heroe.heroes_position)
+        coord_hero_T1[0] = coord_hero_T1[0] + 45
+        laby.update_list_floors_coord([heroe.heroes_position, tuple(coord_hero_T1)])
+        print(heroe.heroes_position)
+        print(tuple(coord_hero_T1))
+        heroe.heroes_position = tuple(coord_hero_T1)
         print("Player moved right!")
-
+    set_case_definition(
+        laby.list_walls_coord,
+        laby.list_floors_coord,
+        heroe.heroes_position,
+        laby.position_guard_coord,
+        laby.ether_coord,
+        laby.plastic_tube_coord,
+        laby.syringe_coord,
+    )
 
 # Initialisation du Pygame
 pygame.init()
@@ -93,7 +105,7 @@ heroe = Heroes(laby)
 set_case_definition(
     laby.list_walls_coord,
     laby.list_floors_coord,
-    laby.position_departure_coord,
+    heroe.heroes_position,
     laby.position_guard_coord,
     laby.ether_coord,
     laby.plastic_tube_coord,
