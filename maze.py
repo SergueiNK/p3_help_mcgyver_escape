@@ -10,7 +10,7 @@ class Maze:
     ether_coord = ()
     plastic_tube_coord = ()
     syringe_coord = ()
-    hero = None
+    heroe_position = ()
 
     def __init__(self):
         with open(constants.STRUCTURE_FILE, 'r') as data:
@@ -42,6 +42,13 @@ class Maze:
 
     def update_list_floors_coord(self, list_items_coord):
         for coord in list_items_coord:
-            self.list_floors_coord.remove(coord)
+            #condition Ajout/suppression de coord
+            if coord in self.list_floors_coord:
+                self.list_floors_coord.remove(coord)
+            else:
+                self.list_floors_coord.append(coord)
+            # if self.heroe_position  in self.list_floors_coord:
+            # self.heroes_position = ((self.index_x + 1) * constants.TILE_SIZE, self.index_y * constants.TILE_SIZE)
+
 
 

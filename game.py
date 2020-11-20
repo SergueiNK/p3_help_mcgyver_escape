@@ -1,23 +1,10 @@
 import pygame
 import constants
-
-# Initialisation du Pygame
-pygame.init()
-
-# configuration d'un nom pour la fenêtre Pygame
-pygame.display.set_caption('Help McGyver escape')
-
-# Programm update ( speed of udate depend of pc's power)
-# Frames per second
-CLOCK_UPDATES = pygame.time.Clock()
-CLOCK_UPDATES.tick(constants.FPS)
-
-# Définition des paramétres d'écran
-SCREEN = pygame.display.set_mode(constants.SCREEN_SIZE, pygame.RESIZABLE)
-SCREEN.fill(constants.BACKGROUND_COLOUR)
+from heroes import Heroes
+from maze import Maze
 
 
-def init_game_structure():
+def init_game_structure(laby, heroe):
     # lancer les modules pygame
     successes, failures = pygame.init()
     print("{0} successes and {1} failures".format(successes, failures))
@@ -30,7 +17,7 @@ def init_game_structure():
                 running = False
                 pygame.quit()
             elif event.type == pygame.KEYDOWN:
-                manag_heroes_move(event)
+                manag_heroes_move(event, laby, heroe)
         # mise à jour de l'écran
         pygame.display.update()
 
@@ -70,7 +57,7 @@ def set_case_definition(walls_coord,
     for coord in floors_coord:
         SCREEN.blit(show_floor, coord)
 
-def manag_heroes_move(event):
+def manag_heroes_move(event, laby, heroe):
     if event.key == pygame.K_UP:
         print("Player moved up!")
     elif event.key == pygame.K_LEFT:
@@ -78,4 +65,42 @@ def manag_heroes_move(event):
     elif event.key == pygame.K_DOWN:
         print("Player moved down!")
     elif event.key == pygame.K_RIGHT:
+        # heroe.heroes_position
+        # Modifier le tuple pour avoir la futur position
+        #laby.update_list_floors_coord([coord_hero_T,coord_hero_t-1])
         print("Player moved right!")
+
+
+# Initialisation du Pygame
+pygame.init()
+
+# configuration d'un nom pour la fenêtre Pygame
+pygame.display.set_caption('Help McGyver escape')
+
+# Programm update ( speed of udate depend of pc's power)
+# Frames per second
+CLOCK_UPDATES = pygame.time.Clock()
+CLOCK_UPDATES.tick(constants.FPS)
+
+# Définition des paramétres d'écran
+SCREEN = pygame.display.set_mode(constants.SCREEN_SIZE, pygame.RESIZABLE)
+SCREEN.fill(constants.BACKGROUND_COLOUR)
+
+# Pour créer main Maze
+laby = Maze()
+heroe = Heroes(laby)
+
+set_case_definition(
+    laby.list_walls_coord,
+    laby.list_floors_coord,
+    laby.position_departure_coord,
+    laby.position_guard_coord,
+    laby.ether_coord,
+    laby.plastic_tube_coord,
+    laby.syringe_coord,
+)
+
+init_game_structure(laby, heroe)
+
+
+
