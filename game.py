@@ -56,7 +56,7 @@ def manag_heroes_move(event, laby, heroe):
     if event.key == pygame.K_UP:
         print("Player moved up!")
     elif event.key == pygame.K_LEFT:
-        print("Player moved left!")
+        coord_hero_T1[0] = coord_hero_T1[0] - 45
     elif event.key == pygame.K_DOWN:
         print("Player moved down!")
     elif event.key == pygame.K_RIGHT:
