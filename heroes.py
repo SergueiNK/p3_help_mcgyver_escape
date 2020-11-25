@@ -10,7 +10,7 @@ class Heroes:
 
     def __init__(self,laby):
         self.heroes_position = laby.position_departure_coord
-
+        # print(self.heroes_position)
     def update_heroes_position (self,laby):
         print('in')
         # for heroes_position in laby.list_floors_coord:

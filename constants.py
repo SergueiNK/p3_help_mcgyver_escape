@@ -10,6 +10,11 @@ FPS = 60
 # RGB définition de l'intesité des couleurs
 BACKGROUND_COLOUR = (150, 150, 150)
 
+# liste des couleurs
+
+green = (0, 255, 0)
+red = (0, 255, 0)
+
 # liste des images du jeux 
 
 IMAGE_WALL = "res/img/wall_tiles.png"
@@ -20,3 +25,4 @@ IMAGE_GUARD = "res/img/Gardien.png"
 IMAGE_SYRINGE = "res/img/syringe.png"
 IMAGE_PLASTIC_TUBE = "res/img/plastic_tube.png"
 IMAGE_ETHER = "res/img/ether.png "
+

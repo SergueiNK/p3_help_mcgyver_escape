@@ -2,7 +2,7 @@ import pygame
 import constants
 from heroes import Heroes
 from maze import Maze
-
+pygame.init()
 
 def init_game_structure(laby, heroe):
     # lancer les modules pygame
@@ -66,14 +66,14 @@ def manag_heroes_move(event, laby, heroe):
         coord_hero_T1[0] = coord_hero_T1[0] + 45
 
     if tuple(coord_hero_T1) not in laby.list_walls_coord:
+        if tuple(coord_hero_T1) == laby.position_guard_coord:
+            print('win')
         laby.update_list_floors_coord([heroe.heroes_position, tuple(coord_hero_T1)])
         heroe.heroes_position = tuple(coord_hero_T1)
         set_case_definition(laby, heroe)
 
-def end_of_game(heroe, laby):
-     if heroe.heroes_position == laby.position_guad_coord:
-        SCREEN.blit(text1, text1_position)
-
+        # SCREEN.blit(text1, text1_position)
+        # pygame.display.update()
 
 
 
@@ -109,10 +109,10 @@ font_obj = pygame.font.Font('freesansbold.ttf', 32)
 
 # définir le texte réelle en gras ou non (True/False), la couleur, couleur de marquage
 #Partie gagnante
-text1 = font_obj.render('YOU WIN. PLAY AGAIN? ', True, green)
+text1 = font_obj.render('YOU WIN. PLAY AGAIN? ', True, constants.green)
 
 #Partie perdante
-text2 = font_obj.render('YOU LOOSE. PLAY AGAIN? ', True, red)
+text2 = font_obj.render('YOU LOOSE. PLAY AGAIN? ', True, constants.red)
 
 # Définir le centre de texte sur l'écran:
 

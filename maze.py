@@ -29,6 +29,7 @@ class Maze:
                         self.position_departure_coord = coordinate
                     else:
                         self.position_guard_coord = coordinate
+                        print(self.position_guard_coord)
             self.init_items_coord()
 
 
