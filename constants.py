@@ -12,8 +12,8 @@ BACKGROUND_COLOUR = (150, 150, 150)
 
 # liste des couleurs
 
-green = (0, 255, 0)
-red = (0, 255, 0)
+GREEN = (0, 255, 0)
+RED = (0, 255, 0)
 
 # liste des images du jeux 
 

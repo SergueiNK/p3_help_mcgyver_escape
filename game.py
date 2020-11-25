@@ -51,6 +51,30 @@ def set_case_definition(laby, heroe):
         SCREEN.blit(show_floor, coord)
 
 
+def show_notifications():
+
+    font_obj = pygame.font.Font('freesansbold.ttf', 32)
+# définir le texte réelle en gras ou non (True/False), la couleur, couleur de marquage
+
+#Partie gagnante
+    text1 = font_obj.render('YOU WIN. PLAY AGAIN? ', True, constants.GREEN)
+#Partie perdante
+    #text2 = self.font_obj.render('YOU LOOSE. PLAY AGAIN? ', True, constants.RED)
+
+# Définir le centre de texte sur l'écran:
+
+    text1_position = text1.get_rect()
+    #text2_position = text2.get_rect()
+
+# Définir le centre du texte
+
+    text1_position.center = (340, 340)
+    #text2_position.center = (340, 340)
+
+    SCREEN.blit(text1, text1_position)
+####
+
+
 def manag_heroes_move(event, laby, heroe):
     coord_hero_T1 = list(heroe.heroes_position)
     if event.key == pygame.K_UP:
@@ -67,13 +91,13 @@ def manag_heroes_move(event, laby, heroe):
 
     if tuple(coord_hero_T1) not in laby.list_walls_coord:
         if tuple(coord_hero_T1) == laby.position_guard_coord:
-            print('win')
+            show_notifications()
         laby.update_list_floors_coord([heroe.heroes_position, tuple(coord_hero_T1)])
         heroe.heroes_position = tuple(coord_hero_T1)
         set_case_definition(laby, heroe)
 
-        # SCREEN.blit(text1, text1_position)
-        # pygame.display.update()
+
+
 
 
 
@@ -105,23 +129,4 @@ init_game_structure(laby, heroe)
 
 ######## Pour afficher le texte avec Pygame
 # type et la taille du texte
-font_obj = pygame.font.Font('freesansbold.ttf', 32)
 
-# définir le texte réelle en gras ou non (True/False), la couleur, couleur de marquage
-#Partie gagnante
-text1 = font_obj.render('YOU WIN. PLAY AGAIN? ', True, constants.green)
-
-#Partie perdante
-text2 = font_obj.render('YOU LOOSE. PLAY AGAIN? ', True, constants.red)
-
-# Définir le centre de texte sur l'écran:
-
-text1_position = text1.get_rect()
-text2_position = text2.get_rect()
-
-# Définir le centre du texte
-
-text1_position.center = (340, 340)
-text2_position.center = (340, 340)
-
-####
