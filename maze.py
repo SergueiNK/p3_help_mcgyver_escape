@@ -29,7 +29,7 @@ class Maze:
                         self.position_departure_coord = coordinate
                     else:
                         self.position_guard_coord = coordinate
-        self.init_items_coord()
+            self.init_items_coord()
 
 
     def init_items_coord(self):
@@ -47,6 +47,7 @@ class Maze:
                 self.list_floors_coord.remove(coord)
             else:
                 self.list_floors_coord.append(coord)
+
             # if self.heroe_position  in self.list_floors_coord:
             # self.heroes_position = ((self.index_x + 1) * constants.TILE_SIZE, self.index_y * constants.TILE_SIZE)
 

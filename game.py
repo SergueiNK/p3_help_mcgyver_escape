@@ -54,11 +54,13 @@ def set_case_definition(laby, heroe):
 def manag_heroes_move(event, laby, heroe):
     coord_hero_T1 = list(heroe.heroes_position)
     if event.key == pygame.K_UP:
-        print("Player moved up!")
+        coord_hero_T1[1] = coord_hero_T1[1] - 45
+        # on rentre dans la position du tuple index [1] qui correspond au déplacement sur y
     elif event.key == pygame.K_LEFT:
         coord_hero_T1[0] = coord_hero_T1[0] - 45
+        # on rentre dans la position du tuple index [0] qui correspond au déplacement sur x
     elif event.key == pygame.K_DOWN:
-        print("Player moved down!")
+        coord_hero_T1[1] = coord_hero_T1[1] + 45
     elif event.key == pygame.K_RIGHT:
         # Modifier le tuple pour avoir la futur position
         coord_hero_T1[0] = coord_hero_T1[0] + 45
@@ -67,6 +69,12 @@ def manag_heroes_move(event, laby, heroe):
         laby.update_list_floors_coord([heroe.heroes_position, tuple(coord_hero_T1)])
         heroe.heroes_position = tuple(coord_hero_T1)
         set_case_definition(laby, heroe)
+
+def end_of_game(heroe, laby):
+     if heroe.heroes_position == laby.position_guad_coord:
+        SCREEN.blit(text1, text1_position)
+
+
 
 
 # # # # # # # # #
@@ -93,8 +101,27 @@ heroe = Heroes(laby)
 
 set_case_definition(laby, heroe)
 
-
 init_game_structure(laby, heroe)
 
+######## Pour afficher le texte avec Pygame
+# type et la taille du texte
+font_obj = pygame.font.Font('freesansbold.ttf', 32)
 
+# définir le texte réelle en gras ou non (True/False), la couleur, couleur de marquage
+#Partie gagnante
+text1 = font_obj.render('YOU WIN. PLAY AGAIN? ', True, green)
 
+#Partie perdante
+text2 = font_obj.render('YOU LOOSE. PLAY AGAIN? ', True, red)
+
+# Définir le centre de texte sur l'écran:
+
+text1_position = text1.get_rect()
+text2_position = text2.get_rect()
+
+# Définir le centre du texte
+
+text1_position.center = (340, 340)
+text2_position.center = (340, 340)
+
+####
