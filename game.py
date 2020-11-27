@@ -2,7 +2,7 @@ import pygame
 import constants
 from heroes import Heroes
 from maze import Maze
-pygame.init()
+
 
 def init_game_structure(laby, heroe):
     # lancer les modules pygame
@@ -51,15 +51,17 @@ def set_case_definition(laby, heroe):
         SCREEN.blit(show_floor, coord)
 
 
-def show_notifications():
+def end_game(laby, heroe):
+
+    print('show notification')
 
     font_obj = pygame.font.Font('freesansbold.ttf', 32)
 # définir le texte réelle en gras ou non (True/False), la couleur, couleur de marquage
 
 #Partie gagnante
-    text1 = font_obj.render('YOU WIN. PLAY AGAIN? ', True, constants.GREEN)
+    text1 = font_obj.render('YOU WIN. THE GUARD IS SLEEPING. PLAY AGAIN? Y/N', True, constants.GREEN)
 #Partie perdante
-    #text2 = self.font_obj.render('YOU LOOSE. PLAY AGAIN? ', True, constants.RED)
+    #text2 = self.font_obj.render('YOU LOOSE. DEAD! PLAY AGAIN?.Y/N ', True, constants.RED)
 
 # Définir le centre de texte sur l'écran:
 
@@ -72,6 +74,9 @@ def show_notifications():
     #text2_position.center = (340, 340)
 
     SCREEN.blit(text1, text1_position)
+
+    pygame.display.update()
+    init_game_structure(laby, heroe)
 ####
 
 
@@ -90,15 +95,45 @@ def manag_heroes_move(event, laby, heroe):
         coord_hero_T1[0] = coord_hero_T1[0] + 45
 
     if tuple(coord_hero_T1) not in laby.list_walls_coord:
+        # fin de la partie version simplifié
         if tuple(coord_hero_T1) == laby.position_guard_coord:
-            show_notifications()
-        laby.update_list_floors_coord([heroe.heroes_position, tuple(coord_hero_T1)])
-        heroe.heroes_position = tuple(coord_hero_T1)
-        set_case_definition(laby, heroe)
+            end_game(laby, heroe)
+            #fin de la partie final:
+            #si l'inventaire heroe == 3 piéces alors
+        elif tuple(coord_hero_T1) in laby.ether_coord:
+            laby.ether_coord = ()
+            heroe.heroes_inventory += 1
+            laby.update_list_floors_coord([heroe.heroes_position, tuple(coord_hero_T1)])
+        elif tuple(coord_hero_T1) in laby.syringe_coord:
+            laby.syringe_coord = ()
+            heroe.heroes_inventory += 1
+            laby.update_list_floors_coord([heroe.heroes_position, tuple(coord_hero_T1)])
+        elif tuple(coord_hero_T1) in laby.plastic_tube_coord:
+            laby.plastic_tube_coord = ()
+            heroe.heroes_inventory += 1
+            laby.update_list_floors_coord([heroe.heroes_position, tuple(coord_hero_T1)])
+        else:
+            laby.update_list_floors_coord([heroe.heroes_position, tuple(coord_hero_T1)])
+            heroe.heroes_position = tuple(coord_hero_T1)
+            set_case_definition(laby, heroe)
+        #Si coord_hero_T1 est dans la liste objets
+            #enleve la coord de l'objet concerné
+            #+1 sur inventaire heros
+            #laby.update_list_floors_coord([heroe.heroes_position, tuple(coord_hero_T1)])
 
 
 
 
+    # update_heroes_inventory(coord_hero_T1)
+
+ # def update_heroes_inventory(laby, hereo):
+ #     # Conditions d'ajout à l'inventaire :
+ #     # Si les coordonnées de heros sont dans la list d'objets d'inventaire alors rajouter les coordonnées
+ #     # de l'heros à l'inventaire et supprimer la coordonnée de l'heroes de l'inventaire d'objet
+ #
+ #    if coord_hero_T1 in laby.list_items_coord:
+ #       heroe.heroes_inventory.append(coord_hero_T1)
+ #       laby.list_items_coord.remove(coord_hero_T1)
 
 
 # # # # # # # # #
