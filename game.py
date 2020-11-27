@@ -35,14 +35,17 @@ def set_case_definition(laby, heroe):
     show_wall = pygame.image.load(constants.IMAGE_WALL).convert_alpha()
     show_floor = pygame.image.load(constants.IMAGE_FLOOR).convert_alpha()
 
-    show_ether_coord = pygame.image.load(constants.IMAGE_ETHER).convert_alpha()
-    SCREEN.blit(show_ether_coord, laby.ether_coord)
+    if laby.ether_coord != ():
+        show_ether_coord = pygame.image.load(constants.IMAGE_ETHER).convert_alpha()
+        SCREEN.blit(show_ether_coord, laby.ether_coord)
 
-    show_plastic_tube_coord = pygame.image.load(constants.IMAGE_PLASTIC_TUBE).convert_alpha()
-    SCREEN.blit(show_plastic_tube_coord, laby.plastic_tube_coord)
+    if laby.plastic_tube_coord != ():
+        show_plastic_tube_coord = pygame.image.load(constants.IMAGE_PLASTIC_TUBE).convert_alpha()
+        SCREEN.blit(show_plastic_tube_coord, laby.plastic_tube_coord)
 
-    show_syringe_coord = pygame.image.load(constants.IMAGE_SYRINGE).convert_alpha()
-    SCREEN.blit(show_syringe_coord, laby.syringe_coord)
+    if laby.syringe_coord != ():
+        show_syringe_coord = pygame.image.load(constants.IMAGE_SYRINGE).convert_alpha()
+        SCREEN.blit(show_syringe_coord, laby.syringe_coord)
 
     # Dimension prémier tuple est la position et le deuxiéme size
     for coord in laby.list_walls_coord:
@@ -53,7 +56,7 @@ def set_case_definition(laby, heroe):
 
 def end_game(laby, heroe):
 
-    print('show notification')
+    #print('show notification')
 
     font_obj = pygame.font.Font('freesansbold.ttf', 32)
 # définir le texte réelle en gras ou non (True/False), la couleur, couleur de marquage
@@ -96,19 +99,27 @@ def manag_heroes_move(event, laby, heroe):
 
     if tuple(coord_hero_T1) not in laby.list_walls_coord:
         # fin de la partie version simplifié
+        #print(tuple(coord_hero_T1)) #ok
+        #print(coord_hero_T1)
         if tuple(coord_hero_T1) == laby.position_guard_coord:
+            print(tuple(coord_hero_T1)) #PB D'affichage
             end_game(laby, heroe)
+            print(coord_hero_T1)
             #fin de la partie final:
             #si l'inventaire heroe == 3 piéces alors
-        elif tuple(coord_hero_T1) in laby.ether_coord:
+        elif tuple(coord_hero_T1) == laby.ether_coord:
+            print(coord_hero_T1)
             laby.ether_coord = ()
+            laby.update_list_floors_coord([laby.ether_coord, heroe.heroes_position, tuple(coord_hero_T1)])
+
             heroe.heroes_inventory += 1
-            laby.update_list_floors_coord([heroe.heroes_position, tuple(coord_hero_T1)])
-        elif tuple(coord_hero_T1) in laby.syringe_coord:
+
+            print(heroe.heroes_inventory)
+        elif tuple(coord_hero_T1) == laby.syringe_coord:
             laby.syringe_coord = ()
             heroe.heroes_inventory += 1
             laby.update_list_floors_coord([heroe.heroes_position, tuple(coord_hero_T1)])
-        elif tuple(coord_hero_T1) in laby.plastic_tube_coord:
+        elif tuple(coord_hero_T1) == laby.plastic_tube_coord:
             laby.plastic_tube_coord = ()
             heroe.heroes_inventory += 1
             laby.update_list_floors_coord([heroe.heroes_position, tuple(coord_hero_T1)])
@@ -121,8 +132,7 @@ def manag_heroes_move(event, laby, heroe):
             #+1 sur inventaire heros
             #laby.update_list_floors_coord([heroe.heroes_position, tuple(coord_hero_T1)])
 
-
-
+    #print(coord_hero_T1)
 
     # update_heroes_inventory(coord_hero_T1)
 

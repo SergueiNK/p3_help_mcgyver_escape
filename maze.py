@@ -29,13 +29,13 @@ class Maze:
                         self.position_departure_coord = coordinate
                     else:
                         self.position_guard_coord = coordinate
-                        print(self.position_guard_coord)
+
             self.init_items_coord()
 
 
     def init_items_coord(self):
         random_items_coord = random.sample(self.list_floors_coord, 3)
-        print(random_items_coord)
+        #print(random_items_coord)
         self.ether_coord = random_items_coord[0]
         self.plastic_tube_coord = random_items_coord[1]
         self.syringe_coord = random_items_coord[2]
@@ -45,7 +45,7 @@ class Maze:
     def update_list_floors_coord(self, list_items_coord):
         for coord in list_items_coord:
             #condition Ajout/suppression de coord
-            print(list_items_coord)
+
             if coord in self.list_floors_coord:
                 self.list_floors_coord.remove(coord)
             else:

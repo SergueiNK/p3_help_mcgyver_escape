@@ -9,6 +9,7 @@ class Heroes:
     heroes_position = ()
     heroes_inventory = 0
 
+
     def __init__(self,laby):
         self.heroes_position = laby.position_departure_coord
         # print(self.heroes_position)
