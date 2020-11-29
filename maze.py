@@ -14,6 +14,7 @@ class Maze:
 
     def __init__(self):
         print('INIT GAME')
+        # création de la structure de labyrinthe
         with open(constants.STRUCTURE_FILE, 'r') as data:
             for index_y, line in enumerate(data):
                 # segmentation par ligne en ordonnées.
@@ -34,21 +35,23 @@ class Maze:
             self.init_items_coord()
 
     def init_items_coord(self):
+        # attribution aleatoires de coordonnées aux objets
         random_items_coord = random.sample(self.list_floors_coord, 3)
         # print(random_items_coord)
         self.ether_coord = random_items_coord[0]
         self.plastic_tube_coord = random_items_coord[1]
         self.syringe_coord = random_items_coord[2]
+
+        # appel de la fonction update_list_floors_coord
         self.update_list_floors_coord(random_items_coord)
 
     def update_list_floors_coord(self, list_items_coord):
         for coord in list_items_coord:
-            # condition Ajout/suppression de coord
+            # condition Ajout/suppression de coord dans la list_floors_coord
 
             if coord in self.list_floors_coord:
                 self.list_floors_coord.remove(coord)
             else:
                 self.list_floors_coord.append(coord)
 
-            # if self.heroe_position  in self.list_floors_coord:
-            # self.heroes_position = ((self.index_x + 1) * constants.TILE_SIZE, self.index_y * constants.TILE_SIZE)
+

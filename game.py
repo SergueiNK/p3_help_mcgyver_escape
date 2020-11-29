@@ -24,8 +24,8 @@ def init_game_structure(laby, heroe, close_game):
             # boucle d'ecoute des évenements
             for event in pygame.event.get():
 
-                #si on appuye sur la croix:
-                # condition pour quitter le jeux en appuyant sur la croix
+                #si on appuie sur la croix:
+                # condition pour quitter le jeux en appuiant sur la croix
                 if event.type == pygame.QUIT:
                     running = False
                     pygame.quit()
@@ -40,7 +40,7 @@ def init_game_structure(laby, heroe, close_game):
 
 def set_case_definition(laby, heroe):
 
-    # fonction d'attribution de cases
+    # affichage d'image par case
 
     show_departure = pygame.image.load(constants.IMAGE_GYVER).convert_alpha()
     SCREEN.blit(show_departure, heroe.heroes_position)
@@ -51,6 +51,8 @@ def set_case_definition(laby, heroe):
     show_wall = pygame.image.load(constants.IMAGE_WALL).convert_alpha()
     show_floor = pygame.image.load(constants.IMAGE_FLOOR).convert_alpha()
 
+    # condition d'affichage des objets
+    # si les coordonnées de laby.ether_coord ne sont pas nuls alors. Pareil pour les trois autres objets.
     if laby.ether_coord != ():
         show_ether_coord = pygame.image.load(constants.IMAGE_ETHER).convert_alpha()
         SCREEN.blit(show_ether_coord, laby.ether_coord)
@@ -63,7 +65,7 @@ def set_case_definition(laby, heroe):
         show_syringe_coord = pygame.image.load(constants.IMAGE_SYRINGE).convert_alpha()
         SCREEN.blit(show_syringe_coord, laby.syringe_coord)
 
-    # Dimension prémier tuple est la position et le deuxiéme size
+    # Dimension prémier tuple est la position et le deuxiéme size. Affichage d'images des mûrs et des chemins.
     for coord in laby.list_walls_coord:
         SCREEN.blit(show_wall, coord)
     for coord in laby.list_floors_coord:
@@ -72,9 +74,12 @@ def set_case_definition(laby, heroe):
 
 def end_game(laby, heroe):
 
+    # Fonction de conditions et d'affichage de fin de partie
     #print('show notification')
+    # définition de la police et de dimension du texte
     font_obj = pygame.font.Font('freesansbold.ttf', 20)
 
+    # affichage de la condition de la partie gagnante/perdante
     if heroe.heroes_inventory == 3:
         text_words = "YOU WIN. THE GUARD IS SLEEPING."
         color = constants.GREEN
@@ -82,20 +87,22 @@ def end_game(laby, heroe):
         text_words = "YOU LOOSE. DEAD!"
         color = constants.RED
 
+    # définir le texte réelle en gras ou non (True/False), la couleur et définition du texte.
     text = font_obj.render(text_words, True, color)
     text_position = text.get_rect()
     text_position.center = (340, 340)
     SCREEN.blit(text, text_position)
 
+    # rafraichissement d'image
     pygame.display.update()
+
+    # Appel de la fonction avec condition True pour la fermeture du jeux
     init_game_structure(laby, heroe, True)
-
-# définir le texte réelle en gras ou non (True/False), la couleur, couleur de marquage
-
-
 
 
 def manag_heroes_move(event, laby, heroe):
+    # Fonction de gestion des mouvements de l'heros et du rammassage d'objets
+    # Définition initiales de coordonnées de gyver
     coord_hero_T1 = list(heroe.heroes_position)
     if event.key == pygame.K_UP:
         coord_hero_T1[1] = coord_hero_T1[1] - 45
@@ -110,15 +117,17 @@ def manag_heroes_move(event, laby, heroe):
         coord_hero_T1[0] = coord_hero_T1[0] + 45
 
     if tuple(coord_hero_T1) not in laby.list_walls_coord:
-        # fin de la partie version simplifié
+        # fin de la partie je veux que gyver aille sur la case de guard
         if tuple(coord_hero_T1) == laby.position_guard_coord:
+            #Appelle de l'affichage de fin de partie
             end_game(laby, heroe)
-            #fin de la partie final:
-            #si l'inventaire heroe == 3 piéces alors
+        # sinon si les coordonnées correspondent à ceux d'un objet alors
         elif tuple(coord_hero_T1) == laby.ether_coord:
-            #ether devient un floor
+            #on appel et modifie la liste des floors en lui enlévant la position de laby.ether_coord
             laby.update_list_floors_coord([laby.ether_coord])
             laby.ether_coord = ()
+            #on rajoute +1 à l'inventaire de gyver
+            #c'est la même methode pour les autres objets
             heroe.heroes_inventory += 1
         elif tuple(coord_hero_T1) == laby.syringe_coord:
             laby.update_list_floors_coord([laby.syringe_coord])
@@ -129,8 +138,10 @@ def manag_heroes_move(event, laby, heroe):
             laby.plastic_tube_coord = ()
             heroe.heroes_inventory += 1
 
+        # On appel et modifie la fonction floors pour mettre à jours la position de l'heros
         laby.update_list_floors_coord([heroe.heroes_position, tuple(coord_hero_T1)])
         heroe.heroes_position = tuple(coord_hero_T1)
+        # On appel la fonction pour actualiser l'affichage géneral du labyrinthe
         set_case_definition(laby, heroe)
 
 
@@ -158,8 +169,10 @@ heroe = Heroes(laby)
 
 set_case_definition(laby, heroe)
 
+#Conditions génerales False pour la fin de partie. C'est à dire que gyver n'est pas encore arrivée vers le garde
+#et le jeux peut se derouler normalement
+
 init_game_structure(laby, heroe, False)
 
-######## Pour afficher le texte avec Pygame
-# type et la taille du texte
+
 

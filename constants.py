@@ -1,4 +1,4 @@
-
+# laby version .txt
 STRUCTURE_FILE = 'res/structure.txt'
 
 TILE_SIZE = 45
