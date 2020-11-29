@@ -1,8 +1,8 @@
 import constants
 import random
 
-class Maze:
 
+class Maze:
     list_walls_coord = []
     list_floors_coord = []
     position_guard_coord = ()
@@ -32,19 +32,17 @@ class Maze:
 
             self.init_items_coord()
 
-
     def init_items_coord(self):
         random_items_coord = random.sample(self.list_floors_coord, 3)
-        #print(random_items_coord)
+        # print(random_items_coord)
         self.ether_coord = random_items_coord[0]
         self.plastic_tube_coord = random_items_coord[1]
         self.syringe_coord = random_items_coord[2]
         self.update_list_floors_coord(random_items_coord)
 
-
     def update_list_floors_coord(self, list_items_coord):
         for coord in list_items_coord:
-            #condition Ajout/suppression de coord
+            # condition Ajout/suppression de coord
 
             if coord in self.list_floors_coord:
                 self.list_floors_coord.remove(coord)
@@ -53,6 +51,3 @@ class Maze:
 
             # if self.heroe_position  in self.list_floors_coord:
             # self.heroes_position = ((self.index_x + 1) * constants.TILE_SIZE, self.index_y * constants.TILE_SIZE)
-
-
-
