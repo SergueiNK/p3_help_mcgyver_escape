@@ -12,5 +12,6 @@ class Heroes:
 
     def __init__(self, laby):
         self.heroes_position = laby.position_departure_coord
+        print('INIT HERO')
         # print(self.heroes_position)
 

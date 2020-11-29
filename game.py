@@ -14,21 +14,28 @@ def init_game_structure(laby, heroe, close_game):
     # lancement de la boucle pour garder l'ouverture de l'écran
     running = True
     while running:
+        # si hero sur le gardien (je viens de la fonction end_game)
         if close_game:
-            #time 1s sans rien faire pour lire
-            time.sleep(1)
+            time.sleep(2)
             running = False
             pygame.quit()
+        # sinon écoute des evenements
         else:
+            # boucle d'ecoute des évenements
             for event in pygame.event.get():
+
+                #si on appuye sur la croix:
+                # condition pour quitter le jeux en appuyant sur la croix
                 if event.type == pygame.QUIT:
                     running = False
                     pygame.quit()
+
+                #si non si:
+                # condition pour la lecture d'appuye sur les touches
                 elif event.type == pygame.KEYDOWN:
                     manag_heroes_move(event, laby, heroe)
-
-            # mise à jour de l'écran
-            pygame.display.update()
+                # mise à jour de l'écran
+                pygame.display.update()
 
 
 def set_case_definition(laby, heroe):
@@ -66,15 +73,13 @@ def set_case_definition(laby, heroe):
 def end_game(laby, heroe):
 
     #print('show notification')
-    font_obj = pygame.font.Font('freesansbold.ttf', 32)
+    font_obj = pygame.font.Font('freesansbold.ttf', 20)
 
     if heroe.heroes_inventory == 3:
-        text_words = "YOU WIN. THE GUARD IS SLEEPING. PLAY AGAIN? Y/N"
-        close_game = True
+        text_words = "YOU WIN. THE GUARD IS SLEEPING."
         color = constants.GREEN
     else:
-        text_words = "YOU LOOSE. DEAD! PLAY AGAIN?.Y/N"
-        close_game = False
+        text_words = "YOU LOOSE. DEAD!"
         color = constants.RED
 
     text = font_obj.render(text_words, True, color)
@@ -83,7 +88,7 @@ def end_game(laby, heroe):
     SCREEN.blit(text, text_position)
 
     pygame.display.update()
-    init_game_structure(laby, heroe, close_game)
+    init_game_structure(laby, heroe, True)
 
 # définir le texte réelle en gras ou non (True/False), la couleur, couleur de marquage
 

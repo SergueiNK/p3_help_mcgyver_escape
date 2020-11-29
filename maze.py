@@ -13,6 +13,7 @@ class Maze:
     heroe_position = ()
 
     def __init__(self):
+        print('INIT GAME')
         with open(constants.STRUCTURE_FILE, 'r') as data:
             for index_y, line in enumerate(data):
                 # segmentation par ligne en ordonnées.
