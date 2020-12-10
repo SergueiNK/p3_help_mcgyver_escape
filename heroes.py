@@ -6,7 +6,7 @@ class Heroes:
     heroes_position = ()
     #Inventaire gyver
     heroes_inventory = 0
-    # laby = Maze()
+    laby = Maze()
 
     def __init__(self, laby):
         #définition de la position de l'heros
@@ -18,6 +18,7 @@ class Heroes:
         # Définition initiales de coordonnées de gyver
         coord_hero_T1 = list(self.heroes_position)
         self.direction = 0
+        mouv_validate = False
         if self.direction == "up":
             coord_hero_T1[1] = coord_hero_T1[1] - 45
             # on rentre dans la position du tuple index [1] qui correspond aSCREEN.blit(show_floor, coord)u déplacement sur y
@@ -31,12 +32,15 @@ class Heroes:
             # Modifier le tuple pour avoir la futur position
             coord_hero_T1[0] = coord_hero_T1[0] + 45
 
+        if laby.validate_new_position(coord_hero_T1) == True:
+            self.heroes_position = coord_hero_T1
+
         if tuple(coord_hero_T1) not in laby.list_walls_coord:
             # fin de la partie je veux que gyver aille sur la case de guard
             if tuple(coord_hero_T1) == laby.position_guard_coord:
                 #Appelle de l'affichage de fin de partie
                 self.finish = "finish"
-                #game.end_game(laby)
+                # game.end_game(laby)
                 # sinon si les coordonnées correspondent à ceux d'un objet alors
             elif tuple(coord_hero_T1) == laby.ether_coord:
                 #on appel et modifie la liste des floors en lui enlévant la position de laby.ether_coord

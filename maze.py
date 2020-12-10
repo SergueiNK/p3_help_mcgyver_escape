@@ -1,6 +1,6 @@
 import constants
 import random
-
+from heroes import Heroes
 
 class Maze:
     list_walls_coord = []
@@ -55,3 +55,9 @@ class Maze:
                 self.list_floors_coord.append(coord)
 
 
+    def validate_new_position(self,position):
+
+        if tuple(position) not in self.list_walls_coord():
+            return True
+
+        else: False
