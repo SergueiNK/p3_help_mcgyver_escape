@@ -3,6 +3,33 @@ import random
 
 
 class Maze:
+    """
+    class Maze who define the labyrinth.
+
+    That class has three methods.
+    The init method generate the structure.
+    The items coord generate the random coordinate for items.
+    The theerd update the list floor coordinate
+
+    Attributes
+    ----------
+
+    list_walls_coord : list
+        coordinates of labyrinth walls
+    list_floors_coord : list
+        coordinates of labyrinthe floors
+    position_guard_coord : tuple
+        coordinates of guard position
+    position_departure_coord : tuple
+        coordinates of departure position of Gyver
+    ether_coord : tuple
+        coordinates of object ether
+    tube_coord : tuple
+        coordinates of object tube
+    syringe_coord : tuple
+        coordinates of object syring
+
+    """
     list_walls_coord = []
     list_floors_coord = []
     position_guard_coord = ()
@@ -12,7 +39,26 @@ class Maze:
     syringe_coord = ()
 
     def __init__(self):
-        # création de la structure de labyrinthe
+        """
+        Create the structure of labyrinth.
+
+        Open the file with labyrinth structure.
+        Create the differents list in regard of the type of structure.
+        Those lists will be coordinates.
+        I
+        Parameters
+        ----------
+        list_walls_coord : list
+        coordinates of labyrinth walls
+    list_floors_coord : list
+        coordinates of labyrinthe floors
+    position_guard_coord : tuple
+        coordinates of guard position
+    position_departure_coord : tuple
+        coordinates of departure position of Gyver
+
+
+        """
         with open(constants.STRUCTURE_FILE, 'r') as data:
             for index_y, line in enumerate(data):
                 # segmentation par ligne en ordonnées.

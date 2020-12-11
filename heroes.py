@@ -46,7 +46,7 @@ class Heroes:
                 self.laby.update_list_floors_coord([coord_hero_T1])
                 # on rajoute +1 à l'inventaire de gyver
                 self.heroes_inventory += 1
-
+                # condition d'enlevement des coordonnées d'objets de la liste
                 self.laby.ether_coord = () if coord_hero_T1 == self.laby.ether_coord else self.laby.ether_coord
                 self.laby.syringe_coord = () if coord_hero_T1 == self.laby.syringe_coord else self.laby.syringe_coord
                 self.laby.tube_coord = () if coord_hero_T1 == self.laby.tube_coord else self.laby.tube_coord
