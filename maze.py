@@ -14,20 +14,7 @@ class Maze:
     Attributes
     ----------
 
-    list_walls_coord : list
-        coordinates of labyrinth walls
-    list_floors_coord : list
-        coordinates of labyrinthe floors
-    position_guard_coord : tuple
-        coordinates of guard position
-    position_departure_coord : tuple
-        coordinates of departure position of Gyver
-    ether_coord : tuple
-        coordinates of object ether
-    tube_coord : tuple
-        coordinates of object tube
-    syringe_coord : tuple
-        coordinates of object syring
+
 
     """
     list_walls_coord = []
@@ -45,18 +32,6 @@ class Maze:
         Open the file with labyrinth structure.
         Create the differents list in regard of the type of structure.
         Those lists will be coordinates.
-        I
-        Parameters
-        ----------
-        list_walls_coord : list
-        coordinates of labyrinth walls
-    list_floors_coord : list
-        coordinates of labyrinthe floors
-    position_guard_coord : tuple
-        coordinates of guard position
-    position_departure_coord : tuple
-        coordinates of departure position of Gyver
-
 
         """
         with open(constants.STRUCTURE_FILE, 'r') as data:
