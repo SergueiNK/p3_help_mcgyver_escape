@@ -4,17 +4,12 @@ import random
 
 class Maze:
     """
-    class Maze who define the labyrinth.
+    class Maze who defined the labyrinth.
 
     That class has three methods.
     The init method generate the structure.
     The items coord generate the random coordinate for items.
-    The theerd update the list floor coordinate
-
-    Attributes
-    ----------
-
-
+    The third update the list floor coordinate
 
     """
     list_walls_coord = []
@@ -53,16 +48,20 @@ class Maze:
             self.init_items_coord()
 
     def init_items_coord(self):
-        # attribution aleatoires de coordonnées aux objets
+        """
+        Define the random coordinates for items.
+        """
         random_items_coord = random.sample(self.list_floors_coord, 3)
         self.ether_coord = random_items_coord[0]
         self.tube_coord = random_items_coord[1]
         self.syringe_coord = random_items_coord[2]
-
-        # appel de la fonction update_list_floors_coord
         self.update_list_floors_coord(random_items_coord)
 
     def update_list_floors_coord(self, list_items_coord):
+        """
+        Update the list floors coord with
+        items coordinates
+        """
         for coord in list_items_coord:
             # condition Ajout/suppression de coord dans la list_floors_coord
             if coord in self.list_floors_coord:

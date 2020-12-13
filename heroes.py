@@ -2,20 +2,38 @@ import pygame
 
 
 class Heroes:
+    """
+    class Heroes who defined the hero behavior.
+
+    That class has tree methods.
+    The init method defined the hero
+    initial position.
+    The second is in charge of hero move
+    The third is in charge to do the hero move
+    and take items
+
+    """
 
     heroes_position = ()
-    # Inventaire gyver
     heroes_inventory = 0
     laby = ()
 
     def __init__(self, laby):
+        """
+        Defined the initial hero position
+        Initialised laby use to connection class Maze with Heroes
+        """
+
         # définition de la position de l'heros
         self.heroes_position = laby.position_departure_coord
         # Labyrinth initialisé je le met dans l'heros
         self.laby = laby
-        print('INIT HERO')
+
 
     def manag_heroes_move(self, key_pressed):
+        """
+        Management of hero move.
+        """
         # Fonction de gestion des mouvements de l'heros et du rammassage d'objets
         # Définition initiales de coordonnées de gyver
         coord_hero_t1 = list(self.heroes_position)
@@ -32,9 +50,14 @@ class Heroes:
         elif key_pressed == pygame.K_RIGHT:
             # Modifier le tuple pour avoir la futur position
             coord_hero_t1[0] = coord_hero_t1[0] + 45
-        return self.do_heroe_move(tuple(coord_hero_t1))
+        return self.do_heroes_move(tuple(coord_hero_t1))
 
-    def do_heroe_move(self, coord_hero_t1):
+    def do_heroes_move(self, coord_hero_t1):
+        """
+        Management of hero items.
+        Management of items in floors.
+        Update the hero position.
+        """
         if coord_hero_t1 not in self.laby.list_walls_coord:
             # fin de la partie je veux que gyver aille sur la case de guard
             if coord_hero_t1 == self.laby.position_guard_coord:
