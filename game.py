@@ -15,7 +15,6 @@ class Game:
 
     Methods: main, init_game_structure, set_case_definition,
             end_game
-    
     """
 
     def main(self):

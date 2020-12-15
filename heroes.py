@@ -29,8 +29,8 @@ class Heroes:
         coord_hero_t1 = list(self.heroes_position)
 
         """ 
-        It's depend of move the title size is removed 
-        or add. For move on x it use coord_hero_t1[0].
+        It's depend of move the title size is removed or add.
+        For move on x it use coord_hero_t1[0].
         For move on y it use coord_hero_t1[1]
         """
         if key_pressed == pygame.K_UP:
