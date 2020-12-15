@@ -1,27 +1,27 @@
-# laby version .txt
-STRUCTURE_FILE = 'res/structure.txt'
 
-TILE_SIZE = 45
-SCREEN_SIZE = (15 * TILE_SIZE, 15 * TILE_SIZE)
+structure_file = 'res/structure.txt'
 
-# le nombre d'affichages images par second
-FPS = 60
+tile_size = 45
+screen_size = (15 * tile_size, 15 * tile_size)
 
-# RGB définition de l'intesité des couleurs
-BACKGROUND_COLOUR = (150, 150, 150)
+"""The number of image displays per second"""
+fps = 100
 
-# liste des couleurs
+"""RGB definition of color depth"""
+background_colour = (150, 150, 150)
 
-GREEN = (0, 255, 0)
-RED = (255, 0, 0)
+"""list of colors for texts"""
 
-# liste des images du jeux 
+green = (0, 255, 0)
+red = (255, 0, 0)
 
-IMAGE_WALL = "res/img/wall_tiles.png"
-IMAGE_FLOOR = "res/img/floor_tiles.png"
-IMAGE_GYVER = "res/img/MacGyver.png"
-IMAGE_GUARD = "res/img/Gardien.png"
+"""list of used images"""
 
-IMAGE_SYRINGE = "res/img/syringe.png"
-IMAGE_PLASTIC_TUBE = "res/img/plastic_tube.png"
-IMAGE_ETHER = "res/img/ether.png "
+image_wall = "res/img/wall_tiles.png"
+image_floor = "res/img/floor_tiles.png"
+image_gyver = "res/img/MacGyver.png"
+image_guard = "res/img/Gardien.png"
+
+image_syringe = "res/img/syringe.png"
+image_plastic_tube = "res/img/plastic_tube.png"
+image_ether = "res/img/ether.png "

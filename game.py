@@ -1,3 +1,7 @@
+#!/usr/bin/python3.9
+# -*-coding:utf-8 -
+"""Program "Help MacGyver to escape!"""
+
 import time
 import pygame
 import constants
@@ -6,128 +10,138 @@ from maze import Maze
 
 
 class Game:
+    """
+    class Game who defined the display and end of game
+
+    Methods: main, init_game_structure, set_case_definition,
+            end_game
+    
+    """
 
     def main(self):
-        # Pour créer main Maze
+        """
+        Create the main Maze
+        Initial display initialization
+
+        """
         laby = Maze()
         heroe = Heroes(laby)
 
-        # Initialisation du Pygame
+        """Pygame initialisation"""
         pygame.init()
 
-        # configuration d'un nom pour la fenêtre Pygame
+        """Configuring a name for the Pygame window"""
         pygame.display.set_caption('Help McGyver escape')
 
-        # Programm update ( speed of udate depend of pc's power)
-        # Frames per second
-        CLOCK_UPDATES = pygame.time.Clock()
-        CLOCK_UPDATES.tick(constants.FPS)
+        """
+         Program update (speed of update depend of pc's power)
+         Frames per second
+        """
+        clock_updates = pygame.time.Clock()
+        clock_updates.tick(constants.fps)
 
-        # Définition des paramétres d'écran
-        SCREEN = pygame.display.set_mode(constants.SCREEN_SIZE, pygame.RESIZABLE)
-        SCREEN.fill(constants.BACKGROUND_COLOUR)
+        """Screen setting"""
+        screen = pygame.display.set_mode(constants.screen_size, pygame.RESIZABLE)
+        screen.fill(constants.background_colour)
+        self.set_case_definition(screen, laby, heroe)
 
-        self.set_case_definition(SCREEN, laby, heroe)
+        """ 
+        Booleans False = the game continues.
+        The hero are not yet arrived to guardian
+        """
+        self.init_game_structure(screen, laby, heroe, False)
 
-        # Conditions génerales False pour la fin de partie. C'est à dire que gyver n'est pas encore arrivée vers le garde
-        # et le jeux peut se derouler normalement
+    def init_game_structure(self, screen, laby, heroe, close_game):
+        """
+        Main pygame game loop
+        """
 
-        self.init_game_structure(SCREEN, laby, heroe, False)
-
-    def init_game_structure(self, SCREEN, laby, heroe, close_game):
-        # lancer les modules pygame
+        """Launch pygame modules"""
         successes, failures = pygame.init()
         print("{0} successes and {1} failures".format(successes, failures))
 
-        # lancement de la boucle pour garder l'ouverture de l'écran
+        """launch of the loop to keep the screen open"""
         running = True
         while running:
-            # si hero sur le gardien (je viens de la fonction end_game)
+            """if hero on the guardian (I come from the end_game function)"""
             if close_game:
                 time.sleep(3)
                 running = False
                 pygame.quit()
-            # sinon écoute des evenements
             else:
-                # boucle d'ecoute des évenements
+                """events listening loop"""
                 for event in pygame.event.get():
-
-                    # si on appuie sur la croix:
-                    # condition pour quitter le jeux en appuiant sur la croix
+                    """Press the cross to quit the game"""
                     if event.type == pygame.QUIT:
                         running = False
                         pygame.quit()
-
-                    # si non si:
-                    # condition pour la lecture d'appuye sur les touches
                     elif event.type == pygame.KEYDOWN:
-                        # Définition initiales de coordonnées de gyver
+                        """Loop of display and end game"""
                         if heroe.manag_heroes_move(event.key):
-                            self.end_game(SCREEN, laby, heroe)
+                            self.end_game(screen, laby, heroe)
                         else:
-                            self.set_case_definition(SCREEN, laby, heroe)
-                    # mise à jour de l'écran
+                            self.set_case_definition(screen, laby, heroe)
+            """Screen display update"""
             pygame.display.update()
 
     @staticmethod
-    def set_case_definition(SCREEN, laby, heroe):
+    def set_case_definition(screen, laby, heroe):
+        """
+        Display of all images.
+        """
+        show_departure = pygame.image.load(constants.image_gyver).convert_alpha()
+        screen.blit(show_departure, heroe.heroes_position)
 
-        # affichage d'image par case
+        show_guard = pygame.image.load(constants.image_guard).convert_alpha()
+        screen.blit(show_guard, laby.position_guard_coord)
 
-        show_departure = pygame.image.load(constants.IMAGE_GYVER).convert_alpha()
-        SCREEN.blit(show_departure, heroe.heroes_position)
+        show_wall = pygame.image.load(constants.image_wall).convert_alpha()
+        show_floor = pygame.image.load(constants.image_floor).convert_alpha()
 
-        show_guard = pygame.image.load(constants.IMAGE_GUARD).convert_alpha()
-        SCREEN.blit(show_guard, laby.position_guard_coord)
-
-        show_wall = pygame.image.load(constants.IMAGE_WALL).convert_alpha()
-        show_floor = pygame.image.load(constants.IMAGE_FLOOR).convert_alpha()
-
-        # condition d'affichage des objets
-        # si les coordonnées de laby.ether_coord ne sont pas nuls alors. Pareil pour les trois autres objets.
+        """Conditions of items' images display"""
         if laby.ether_coord != ():
-            show_ether_coord = pygame.image.load(constants.IMAGE_ETHER).convert_alpha()
-            SCREEN.blit(show_ether_coord, laby.ether_coord)
+            show_ether_coord = pygame.image.load(constants.image_ether).convert_alpha()
+            screen.blit(show_ether_coord, laby.ether_coord)
 
         if laby.tube_coord != ():
-            show_plastic_tube_coord = pygame.image.load(constants.IMAGE_PLASTIC_TUBE).convert_alpha()
-            SCREEN.blit(show_plastic_tube_coord, laby.tube_coord)
+            show_plastic_tube_coord = pygame.image.load(constants.image_plastic_tube).convert_alpha()
+            screen.blit(show_plastic_tube_coord, laby.tube_coord)
 
         if laby.syringe_coord != ():
-            show_syringe_coord = pygame.image.load(constants.IMAGE_SYRINGE).convert_alpha()
-            SCREEN.blit(show_syringe_coord, laby.syringe_coord)
+            show_syringe_coord = pygame.image.load(constants.image_syringe).convert_alpha()
+            screen.blit(show_syringe_coord, laby.syringe_coord)
 
-        # Dimension prémier tuple est la position et le deuxiéme size. Affichage d'images des mûrs et des chemins.
+        "Walls and floors display images"
         for coord in laby.list_walls_coord:
-            SCREEN.blit(show_wall, coord)
+            screen.blit(show_wall, coord)
         for coord in laby.list_floors_coord:
-            SCREEN.blit(show_floor, coord)
+            screen.blit(show_floor, coord)
 
-    def end_game(self, SCREEN, laby, heroe):
+    def end_game(self, screen, laby, heroe):
+        """The conditions of end game"""
 
-        # Fonction de conditions et d'affichage de fin de partie
-        # définition de la police et de dimension du texte
+        """Definition of the font and the size of the text"""
         font_obj = pygame.font.Font('freesansbold.ttf', 20)
 
-        # affichage de la condition de la partie gagnante/perdante
+        """Display and condition of the winning/losing game"""
         if heroe.heroes_inventory == 3:
             text_words = "YOU WIN. THE GUARD IS SLEEPING."
-            color = constants.GREEN
+            color = constants.green
         else:
             text_words = "YOU LOOSE. DEAD!"
-            color = constants.RED
+            color = constants.red
 
-        # définir le texte réelle en gras ou non (True/False), la couleur et définition du texte.
+        """Defined the text position, bold and color"""
         text = font_obj.render(text_words, True, color)
         text_position = text.get_rect()
         text_position.center = (340, 340)
-        SCREEN.blit(text, text_position)
+        screen.blit(text, text_position)
 
-        # rafraichissement d'image
+        """Image refresh"""
         pygame.display.update()
 
-        # Appel de la fonction avec condition True pour la fermeture du jeux
-        self.init_game_structure(SCREEN, laby, heroe, True)
+        """Call the function if true closed game"""
+        self.init_game_structure(screen, laby, heroe, True)
 
 
 if __name__ == "__main__":
