@@ -65,7 +65,6 @@ class Game:
             """if hero on the guardian (I come from the end_game function)"""
             if close_game:
                 time.sleep(3)
-                running = False
                 pygame.quit()
                 sys.exit()
             else:
@@ -73,7 +72,6 @@ class Game:
                 for event in pygame.event.get():
                     """Press the cross to quit the game"""
                     if event.type == pygame.QUIT:
-                        running = False
                         pygame.quit()
                         sys.exit()
                     elif event.type == pygame.KEYDOWN:
