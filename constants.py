@@ -24,4 +24,4 @@ image_guard = "res/img/Gardien.png"
 
 image_syringe = "res/img/syringe.png"
 image_plastic_tube = "res/img/plastic_tube.png"
-image_ether = "res/img/ether.png "
+image_ether = "res/img/ether.png"

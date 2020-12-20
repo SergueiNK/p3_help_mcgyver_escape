@@ -1,7 +1,7 @@
 #!/usr/bin/python3.9
 # -*-coding:utf-8 -
 """Program "Help MacGyver to escape!"""
-
+import sys
 import time
 import pygame
 import constants
@@ -67,6 +67,7 @@ class Game:
                 time.sleep(3)
                 running = False
                 pygame.quit()
+                sys.exit()
             else:
                 """events listening loop"""
                 for event in pygame.event.get():
@@ -74,14 +75,15 @@ class Game:
                     if event.type == pygame.QUIT:
                         running = False
                         pygame.quit()
+                        sys.exit()
                     elif event.type == pygame.KEYDOWN:
                         """Loop of display and end game"""
                         if heroe.manag_heroes_move(event.key):
                             self.end_game(screen, laby, heroe)
                         else:
                             self.set_case_definition(screen, laby, heroe)
-            """Screen display update"""
-            pygame.display.update()
+                """Screen display update"""
+                pygame.display.update()
 
     @staticmethod
     def set_case_definition(screen, laby, heroe):
