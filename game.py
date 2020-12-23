@@ -40,14 +40,12 @@ class Game:
         clock_updates.tick(constants.fps)
 
         """Screen setting"""
-        screen = pygame.display.set_mode(constants.screen_size, pygame.RESIZABLE)
+        screen = pygame.display.set_mode(constants.screen_size,
+                                         pygame.RESIZABLE)
         screen.fill(constants.background_colour)
         self.set_case_definition(screen, laby, heroe)
 
-        """ 
-        Booleans False = the game continues.
-        The hero are not yet arrived to guardian
-        """
+        """Booleans False = the game continues"""
         self.init_game_structure(screen, laby, heroe, False)
 
     def init_game_structure(self, screen, laby, heroe, close_game):
@@ -88,7 +86,8 @@ class Game:
         """
         Display of all images.
         """
-        show_departure = pygame.image.load(constants.image_gyver).convert_alpha()
+        show_departure = pygame.image.load(constants.image_gyver).\
+            convert_alpha()
         screen.blit(show_departure, heroe.heroes_position)
 
         show_guard = pygame.image.load(constants.image_guard).convert_alpha()
@@ -99,15 +98,18 @@ class Game:
 
         """Conditions of items' images display"""
         if laby.ether_coord != ():
-            show_ether_coord = pygame.image.load(constants.image_ether).convert_alpha()
+            show_ether_coord = pygame.image.load(constants.image_ether).\
+                convert_alpha()
             screen.blit(show_ether_coord, laby.ether_coord)
 
         if laby.tube_coord != ():
-            show_plastic_tube_coord = pygame.image.load(constants.image_plastic_tube).convert_alpha()
+            show_plastic_tube_coord = pygame.image.\
+                load(constants.image_plastic_tube).convert_alpha()
             screen.blit(show_plastic_tube_coord, laby.tube_coord)
 
         if laby.syringe_coord != ():
-            show_syringe_coord = pygame.image.load(constants.image_syringe).convert_alpha()
+            show_syringe_coord = pygame.image.load(constants.image_syringe).\
+                convert_alpha()
             screen.blit(show_syringe_coord, laby.syringe_coord)
 
         "Walls and floors display images"

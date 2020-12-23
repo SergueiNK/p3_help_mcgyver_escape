@@ -34,13 +34,15 @@ class Maze:
             for index_y, line in enumerate(data):
                 """x-line segmentation + line break auto"""
                 for index_x, case_type in enumerate(line.strip('\n')):
-                    coordinate = (index_x * constants.tile_size, index_y * constants.tile_size)
+                    coordinate = (index_x * constants.tile_size,
+                                  index_y * constants.tile_size)
                     """assignment of coordinates for each value"""
                     if case_type == '#':
                         self.list_walls_coord.append(coordinate)
                     elif case_type == '.':
                         self.list_floors_coord.append(coordinate)
                     elif case_type == 'X':
+                        self.position_departure_coord = coordinate
                         self.position_departure_coord = coordinate
                     else:
                         self.position_guard_coord = coordinate

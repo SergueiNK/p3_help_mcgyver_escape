@@ -27,12 +27,9 @@ class Heroes:
 
         """Defined the initial hero pisition"""
         coord_hero_t1 = list(self.heroes_position)
-
-        """ 
-        It's depend of move the title size is removed or add.
+        """It's depend of move the title size is removed or add.
         For move on x it use coord_hero_t1[0].
-        For move on y it use coord_hero_t1[1]
-        """
+        For move on y it use coord_hero_t1[1]."""
         if key_pressed == pygame.K_UP:
             coord_hero_t1[1] = coord_hero_t1[1] - 45
         elif key_pressed == pygame.K_LEFT:
@@ -55,18 +52,27 @@ class Heroes:
             if coord_hero_t1 == self.laby.position_guard_coord:
                 """Call the display of end game"""
                 return 'end'
-            elif coord_hero_t1 in [self.laby.ether_coord, self.laby.syringe_coord, self.laby.tube_coord]:
+            elif coord_hero_t1 in [self.laby.ether_coord,
+                                   self.laby.syringe_coord,
+                                   self.laby.tube_coord]:
 
-                """Modification of list-floors with remove of the  coord_hero_t1"""
+                """Modification of list-floors with remove of  coord_hero_t1"""
                 self.laby.update_list_floors_coord([coord_hero_t1])
                 """Modification of heroes inventory"""
                 self.heroes_inventory += 1
 
                 """Conditions of remove of items coordinates"""
-                self.laby.ether_coord = () if coord_hero_t1 == self.laby.ether_coord else self.laby.ether_coord
-                self.laby.syringe_coord = () if coord_hero_t1 == self.laby.syringe_coord else self.laby.syringe_coord
-                self.laby.tube_coord = () if coord_hero_t1 == self.laby.tube_coord else self.laby.tube_coord
+                self.laby.ether_coord = () \
+                    if coord_hero_t1 == self.laby.ether_coord \
+                    else self.laby.ether_coord
+                self.laby.syringe_coord = () \
+                    if coord_hero_t1 == self.laby.syringe_coord \
+                    else self.laby.syringe_coord
+                self.laby.tube_coord = () \
+                    if coord_hero_t1 == self.laby.tube_coord\
+                    else self.laby.tube_coord
 
             """Update the heroes position"""
-            self.laby.update_list_floors_coord([self.heroes_position, coord_hero_t1])
+            self.laby.update_list_floors_coord([self.heroes_position,
+                                                coord_hero_t1])
             self.heroes_position = coord_hero_t1
