@@ -22,6 +22,16 @@ WINDOBS
 
 `pip install -r ../../requirements.txt`
 
+**Activation virtual env**
+
+LINUX
+
+`source virtual-env/bin/activate`
+
+WINDOWS
+
+`virtual_env\Scripts\activate.bat`
+
 ##** GAME Help MC Gyver Escape - Launch** 
 
 For launch the game type on your local terminal : python game.py
